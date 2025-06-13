@@ -64,4 +64,3 @@ https://xdaforums.com/t/pif-faq.4653307/
 ## Download
 https://github.com/bradford1040/PlayIntegrityFix/releases/latest
 
-)
