@@ -1,8 +1,8 @@
 Telegram channel:
-https://t.me/playintegrityfix
+https://t.me/Bradford1040
 
 Donations:
-https://www.paypal.com/paypalme/chiteroman0
+https://cash.app/$Bradford1040
 
 # v19.1
 
