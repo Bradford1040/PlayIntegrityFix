@@ -18,6 +18,9 @@ public final class CustomPackageInfoCreator implements Parcelable.Creator<Packag
     @Override
     public PackageInfo createFromParcel(Parcel source) {
         PackageInfo packageInfo = originalCreator.createFromParcel(source);
+        if (packageInfo == null) {
+            return null;
+        }
         if (packageInfo.packageName.equals("android")) {
             if (packageInfo.signatures != null && packageInfo.signatures.length > 0) {
                 packageInfo.signatures[0] = spoofedSignature;

@@ -139,7 +139,7 @@ afterEvaluate {
 // This block prevents other modules from trying to depend on it, which is
 // the cause of the "Multiple artifacts exist" build error.
 configurations.all {
-    // The '...Elements' configurations are used for publishing artifacts for consumption.
-    // By disabling them, we declare that this module is a final product and not a library.
-    isCanBeConsumed = false
+    if (name.endsWith("Elements")) {
+        isCanBeConsumed = false
+    }
 }

@@ -19,8 +19,15 @@ import java.util.Locale;
 public final class CustomKeyStoreSpi extends KeyStoreSpi {
     public static volatile KeyStoreSpi keyStoreSpi = null;
 
+    private void ensureInitialized() {
+        if (keyStoreSpi == null) {
+            throw new IllegalStateException("keyStoreSpi not initialized yet!");
+        }
+    }
+
     @Override
     public Key engineGetKey(String alias, char[] password) throws NoSuchAlgorithmException, UnrecoverableKeyException {
+        ensureInitialized();
         return keyStoreSpi.engineGetKey(alias, password);
     }
 
@@ -36,76 +43,91 @@ public final class CustomKeyStoreSpi extends KeyStoreSpi {
                 throw new UnsupportedOperationException();
             }
         }
+        ensureInitialized();
         return keyStoreSpi.engineGetCertificateChain(alias);
     }
 
     @Override
     public Certificate engineGetCertificate(String alias) {
+        ensureInitialized();
         return keyStoreSpi.engineGetCertificate(alias);
     }
 
     @Override
     public Date engineGetCreationDate(String alias) {
+        ensureInitialized();
         return keyStoreSpi.engineGetCreationDate(alias);
     }
 
     @Override
     public void engineSetKeyEntry(String alias, Key key, char[] password, Certificate[] chain) throws KeyStoreException {
+        ensureInitialized();
         keyStoreSpi.engineSetKeyEntry(alias, key, password, chain);
     }
 
     @Override
     public void engineSetKeyEntry(String alias, byte[] key, Certificate[] chain) throws KeyStoreException {
+        ensureInitialized();
         keyStoreSpi.engineSetKeyEntry(alias, key, chain);
     }
 
     @Override
     public void engineSetCertificateEntry(String alias, Certificate cert) throws KeyStoreException {
+        ensureInitialized();
         keyStoreSpi.engineSetCertificateEntry(alias, cert);
     }
 
     @Override
     public void engineDeleteEntry(String alias) throws KeyStoreException {
+        ensureInitialized();
         keyStoreSpi.engineDeleteEntry(alias);
     }
 
     @Override
     public Enumeration<String> engineAliases() {
+        ensureInitialized();
         return keyStoreSpi.engineAliases();
     }
 
     @Override
     public boolean engineContainsAlias(String alias) {
+        ensureInitialized();
         return keyStoreSpi.engineContainsAlias(alias);
     }
 
     @Override
     public int engineSize() {
+        ensureInitialized();
         return keyStoreSpi.engineSize();
     }
 
     @Override
     public boolean engineIsKeyEntry(String alias) {
+        ensureInitialized();
         return keyStoreSpi.engineIsKeyEntry(alias);
     }
 
     @Override
     public boolean engineIsCertificateEntry(String alias) {
+        ensureInitialized();
         return keyStoreSpi.engineIsCertificateEntry(alias);
     }
 
     @Override
     public String engineGetCertificateAlias(Certificate cert) {
+        ensureInitialized();
         return keyStoreSpi.engineGetCertificateAlias(cert);
     }
 
     @Override
     public void engineStore(OutputStream stream, char[] password) throws CertificateException, IOException, NoSuchAlgorithmException {
+        ensureInitialized();
         keyStoreSpi.engineStore(stream, password);
     }
 
     @Override
     public void engineLoad(InputStream stream, char[] password) throws CertificateException, IOException, NoSuchAlgorithmException {
+        ensureInitialized();
         keyStoreSpi.engineLoad(stream, password);
     }
 }
