@@ -1,4 +1,4 @@
-package es.chiteroman.playintegrityfix;
+package es.bradford1040.playintegrityfix;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -23,6 +23,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * This is the main entry point for the Magisk module.
+ * Its primary purpose is to hook into the Android system at runtime to spoof device properties
+ * and modify system behaviors to bypass Google's Play Integrity checks.
+ * This is achieved through a combination of:
+ * 1. Spoofing Build class fields (e.g., MODEL, BRAND) based on a JSON configuration.
+ * 2. Intercepting KeyStore operations to prevent DroidGuard from verifying the keystore.
+ * 3. Spoofing the application signature to match a known-good signature.
+ *
+ * All of this is done using reflection and runtime code manipulation (via Dobby and HiddenApiBypass).
+ */
 public final class EntryPoint {
     public static final String TAG = "PIF";
     private static final Map<Field, String> map = new HashMap<>();

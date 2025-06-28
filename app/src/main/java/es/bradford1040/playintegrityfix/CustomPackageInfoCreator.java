@@ -1,4 +1,4 @@
-package es.chiteroman.playintegrityfix;
+package es.bradford1040.playintegrityfix;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.Signature;

@@ -1,4 +1,4 @@
-package es.chiteroman.playintegrityfix;
+package es.bradford1040.playintegrityfix;
 
 import android.util.Log;
 
@@ -26,6 +26,10 @@ public final class CustomKeyStoreSpi extends KeyStoreSpi {
 
     @Override
     public Certificate[] engineGetCertificateChain(String alias) {
+        // This is the core of the fix.
+        // When DroidGuard (part of Google Play Services) tries to inspect the certificate chain
+        // to verify the keystore, we walk the stack trace. If we see DroidGuard in the call
+        // stack, we throw an exception to prevent it from completing its check.
         for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
             if (stackTraceElement.getClassName().toLowerCase(Locale.US).contains("droidguard")) {
                 Log.w(EntryPoint.TAG, "DroidGuard invoke engineGetCertificateChain! Throwing exception...");

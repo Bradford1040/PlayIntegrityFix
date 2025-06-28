@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application android:hasCode="true">
+        <meta-data
+            android:name="zygisk.Module"
+            android:value="es.bradford1040.playintegrityfix.EntryPoint" />
+    </application>
+</manifest>

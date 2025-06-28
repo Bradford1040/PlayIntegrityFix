@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "es.chiteroman.playintegrityfix"
+    namespace = "es.bradford1040.playintegrityfix"
     compileSdk = 35
     ndkVersion = "28.1.13356709"
     buildToolsVersion = "36.0.0"
@@ -16,13 +16,10 @@ android {
         jniLibs {
             excludes += "**/libdobby.so"
         }
-        resources {
-            excludes += "**"
-        }
     }
 
     defaultConfig {
-        applicationId = "es.chiteroman.playintegrityfix"
+        applicationId = "es.bradford1040.playintegrityfix"
         minSdk = 26
         targetSdk = 35
         versionCode = 19100
@@ -38,10 +35,9 @@ android {
 
                 arguments(
                     "-DCMAKE_BUILD_TYPE=Release",
-                    "-DANDROID_STL=none",
+                    "-DANDROID_STL=c++_static",
                     "-DCMAKE_BUILD_PARALLEL_LEVEL=${Runtime.getRuntime().availableProcessors()}",
-                    "-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON",
-                    "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+                    "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON",
                 )
 
                 val commonFlags = setOf(
@@ -82,13 +78,11 @@ android {
     externalNativeBuild {
         cmake {
             path("src/main/cpp/CMakeLists.txt")
-            version = "3.30.5+"
         }
     }
 }
 
 dependencies {
-    implementation(libs.cxx)
     implementation(libs.hiddenapibypass)
 }
 
@@ -139,4 +133,13 @@ tasks.register<Zip>("zip") {
 
 afterEvaluate {
     tasks["assembleRelease"].finalizedBy("updateModuleProp", "copyFiles", "zip")
+}
+
+// This project is an application and should not be consumed as a library.
+// This block prevents other modules from trying to depend on it, which is
+// the cause of the "Multiple artifacts exist" build error.
+configurations.all {
+    // The '...Elements' configurations are used for publishing artifacts for consumption.
+    // By disabling them, we declare that this module is a final product and not a library.
+    isCanBeConsumed = false
 }
