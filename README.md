@@ -1,5 +1,6 @@
 # Play Integrity Fix
-
+  - Please consider [!SPONSORSHIP](https://paypal.me/bradfordaldenadams) it will help with Android Application Development courses
+_ _ _
 This module tries to fix Play Integrity and SafetyNet verdicts to get a valid attestation.
 
 ## NOTE
