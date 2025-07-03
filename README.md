@@ -1,6 +1,8 @@
 # Play Integrity Fix
   - Please consider [!SPONSORSHIP](https://paypal.me/bradfordaldenadams) it will help with Android Application Development courses
 _ _ _
+![Alt](https://repobeats.axiom.co/api/embed/7e890931572850dc67ba9198ae7e0237af08ccaa.svg "Repobeats analytics image")
+_ _ _
 This module tries to fix Play Integrity and SafetyNet verdicts to get a valid attestation.
 
 ## NOTE
