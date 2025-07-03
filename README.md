@@ -1,4 +1,5 @@
 # Play Integrity Fix
+  - ![visitor badge](https://visitor-badge.laobi.icu/badge?page_id=jwenjian.visitor-badge)
   - Please consider [!SPONSORSHIP](https://paypal.me/bradfordaldenadams) it will help with Android Application Development courses
 _ _ _
 ![Alt](https://repobeats.axiom.co/api/embed/7e890931572850dc67ba9198ae7e0237af08ccaa.svg "Repobeats analytics image")
