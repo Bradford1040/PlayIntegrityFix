@@ -1,6 +1,9 @@
 # Play Integrity Fix
   - ![visitor badge](https://visitor-badge.laobi.icu/badge?page_id=Bradford1040.visitor-badge)
   - Please consider [!SPONSORSHIP](https://paypal.me/bradfordaldenadams) it will help with Android Application Development courses
+  - I am extremely thankful to chiteroman for this app, the 19.1 build I have in releases is still his Zip file creation
+  - I am working on a new version but still learning myself and trying to reverse engineer what things needed updates
+  - Found a few things out already but nothing is allowing Tap to Pay to work yet, after testing I will post a new version
 _ _ _
 ![Alt](https://repobeats.axiom.co/api/embed/7e890931572850dc67ba9198ae7e0237af08ccaa.svg "Repobeats analytics image")
 _ _ _
@@ -21,8 +24,8 @@ You will need root and Zygisk, so you must choose ONE of this three setups:
 
 After flashing and reboot your device, you can check PI and SN using these apps:
 
-- Play Integrity -> https://play.google.com/store/apps/details?id=gr.nikolasspyr.integritycheck
-- SafetyNet -> https://play.google.com/store/apps/details?id=rikka.safetynetchecker
+- Play Integrity -> https://play.google.com/store/apps/details?id=gr.nikolasspyr.integritycheck (OutDated)
+- SafetyNet -> https://play.google.com/store/apps/details?id=rikka.safetynetchecker (OutDated)
 
 NOTE: if you get an error message about a limit, you need to use another app, this is because a lot of users are requesting an attestation.
 
