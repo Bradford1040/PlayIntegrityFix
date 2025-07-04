@@ -1,3 +1,4 @@
+#!/bin/sh
 MODPATH="${0%/*}"
 . "$MODPATH"/common_func.sh
 

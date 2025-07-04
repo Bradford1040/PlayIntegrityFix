@@ -1,3 +1,4 @@
+#!/bin/sh
 # Don't flash in recovery!
 if ! $BOOTMODE; then
     ui_print "*********************************************************"

@@ -11,3 +11,6 @@ local.properties
 *.dex
 *.so
 *.zip
+*.hintrc
+.vscode
+.mypy.cache

@@ -1,7 +1,7 @@
 id=playintegrityfix
 name=Play Integrity Fix
-version=v19.1
-versionCode=19100
-author=chiteroman
+version=v19.2
+versionCode=19200
+author=Bradford1040
 description=Universal modular fix for Play Integrity (and SafetyNet) on devices running Android 8-15
-updateJson=https://raw.githubusercontent.com/chiteroman/PlayIntegrityFix/main/update.json
+updateJson=https://raw.githubusercontent.com/Bradford1040/PlayIntegrityFix/main/update.json
