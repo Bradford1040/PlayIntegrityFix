@@ -22,8 +22,8 @@ android {
         applicationId = "es.bradford1040.playintegrityfix"
         minSdk = 26
         targetSdk = 35
-        versionCode = 19100
-        versionName = "v19.1"
+        versionCode = 19200
+        versionName = "v19.2"
         multiDexEnabled = false
 
         externalNativeBuild {
