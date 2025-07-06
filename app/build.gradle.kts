@@ -87,16 +87,19 @@ dependencies {
 }
 
 tasks.register("updateModuleProp") {
+    val modulePropFile = project.rootDir.resolve("module/module.prop")
+    val versionName = project.provider { android.defaultConfig.versionName }
+    val versionCode = project.provider { android.defaultConfig.versionCode }
+
+    inputs.property("versionName", versionName)
+    inputs.property("versionCode", versionCode)
+    outputs.file(modulePropFile)
+
     doLast {
-        val versionName = project.android.defaultConfig.versionName
-        val versionCode = project.android.defaultConfig.versionCode
-
-        val modulePropFile = project.rootDir.resolve("module/module.prop")
-
         var content = modulePropFile.readText()
 
-        content = content.replace(Regex("version=.*"), "version=$versionName")
-        content = content.replace(Regex("versionCode=.*"), "versionCode=$versionCode")
+        content = content.replace(Regex("version=.*"), "version=${versionName.get()}")
+        content = content.replace(Regex("versionCode=.*"), "versionCode=${versionCode.get()}")
 
         modulePropFile.writeText(content)
     }
@@ -125,7 +128,8 @@ tasks.register("copyFiles") {
 tasks.register<Zip>("zip") {
     dependsOn("copyFiles")
 
-    archiveFileName.set("PlayIntegrityFix_${project.android.defaultConfig.versionName}.zip")
+    val versionNameProvider = project.provider { android.defaultConfig.versionName }
+    archiveFileName.set(versionNameProvider.map { "PlayIntegrityFix_${it}.zip" })
     destinationDirectory.set(project.rootDir.resolve("out"))
 
     from(project.rootDir.resolve("module"))

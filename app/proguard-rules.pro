@@ -1,7 +1,7 @@
 -dontobfuscate
 -dontwarn *
--keep class es.chiteroman.playintegrityfix.EntryPoint {public <methods>;}
--keep class es.chiteroman.playintegrityfix.CustomKeyStoreSpi
--keep class es.chiteroman.playintegrityfix.CustomProvider
--keep class es.chiteroman.playintegrityfix.CustomPackageInfoCreator
+-keep class es.bradford1040.playintegrityfix.EntryPoint {public <methods>;}
+-keep class es.bradford1040.playintegrityfix.CustomKeyStoreSpi
+-keep class es.bradford1040.playintegrityfix.CustomProvider
+-keep class es.bradford1040.playintegrityfix.CustomPackageInfoCreator
 -keep class org.lsposed.hiddenapibypass.** { *; }
