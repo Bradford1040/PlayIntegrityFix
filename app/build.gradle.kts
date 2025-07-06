@@ -105,38 +105,46 @@ tasks.register("updateModuleProp") {
     }
 }
 
-tasks.register("copyFiles") {
-    dependsOn("updateModuleProp")
+tasks.register<Copy>("copyFiles") {
+    dependsOn(
+        "updateModuleProp",
+        "minifyReleaseWithR8",
+        "stripReleaseDebugSymbols"
+    )
 
-    doLast {
-        val moduleFolder = project.rootDir.resolve("module")
-        val dexFile =
-            project.layout.buildDirectory.get().asFile.resolve("intermediates/dex/release/minifyReleaseWithR8/classes.dex")
-        val soDir =
-            project.layout.buildDirectory.get().asFile.resolve("intermediates/stripped_native_libs/release/stripReleaseDebugSymbols/out/lib")
+    val moduleDir = project.layout.projectDirectory.dir("../module")
+    val dexFile = project.layout.buildDirectory.file("intermediates/dex/release/minifyReleaseWithR8/classes.dex")
+    val soDir = project.layout.buildDirectory.dir("intermediates/stripped_native_libs/release/stripReleaseDebugSymbols/out/lib")
 
-        dexFile.copyTo(moduleFolder.resolve("classes.dex"), overwrite = true)
-
-        soDir.walk().filter { it.isFile && it.extension == "so" }.forEach { soFile ->
-            val abiFolder = soFile.parentFile.name
-            val destination = moduleFolder.resolve("zygisk/$abiFolder.so")
-            soFile.copyTo(destination, overwrite = true)
-        }
+    from(dexFile) {
+        rename { "classes.dex" }
     }
+
+    from(soDir) {
+        eachFile {
+            val abi = file.parentFile.name
+            path = "zygisk/$abi.so"
+        }
+        include("**/*.so")
+    }
+
+    into(moduleDir)
 }
 
 tasks.register<Zip>("zip") {
-    dependsOn("copyFiles")
+    dependsOn(tasks.named("copyFiles"))
 
-    val versionNameProvider = project.provider { android.defaultConfig.versionName }
-    archiveFileName.set(versionNameProvider.map { "PlayIntegrityFix_${it}.zip" })
-    destinationDirectory.set(project.rootDir.resolve("out"))
+    val versionName = project.provider { android.defaultConfig.versionName }
+    archiveFileName.set(versionName.map { "PlayIntegrityFix_${it}.zip" })
+    destinationDirectory.set(project.layout.projectDirectory.dir("../out"))
 
-    from(project.rootDir.resolve("module"))
+    from(project.layout.projectDirectory.dir("../module"))
 }
 
 afterEvaluate {
-    tasks["assembleRelease"].finalizedBy("updateModuleProp", "copyFiles", "zip")
+    tasks.named("assembleRelease").configure {
+        finalizedBy(tasks.named("zip"))
+    }
 }
 
 // This project is an application and should not be consumed as a library.
